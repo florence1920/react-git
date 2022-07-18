@@ -10,24 +10,21 @@
         //**React는 html을 마음대로 컨트롤 할 수 있다.  interactive
         //span 생성
         const root = document.getElementById('root');
-        const Title = () => (
-            <h3 id="title" onMouseEnter={() => console.log('mouse enter')}>
-                Hello I'm title
-            </h3>
+        let counter = 0;
+        function countUp() {
+            counter = counter + 1;
+            render();
+        }
+        function render(){
+            ReactDOM.render(<Container/>, root);
+        }
+        const Container = () => (
+            <div>
+                <h3>Total clicks: {counter}</h3>
+                <button onClick={countUp}>Click me</button>
+            </div>
         );
-        const Button = () => (
-            <button 
-                style={{
-                    backgroundColor:"yellow"
-                }} onClick={() => console.log('im clicked')}
-            >   Click me
-            </button>
-        );
-        const Container = <div>
-            <Title/> 
-            <Button />
-        </div>
         //react-dom으로 html 삽입
-        ReactDOM.render(container, root);
+        render();
     </script>
 </html>
