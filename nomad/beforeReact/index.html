@@ -11,8 +11,8 @@
         //span 생성
         const root = document.getElementById('root');
         function App() {
-            const [minutes, setMinutes] = React.useState(0);
-            const [flipped, setFlipped] = React.useState(false);
+            const [amount, setMinutes] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
             const onChange = (event) =>{
                 setMinutes(event.target.value);
             };
@@ -21,7 +21,7 @@
             };
             const onFlip = () =>{
                 reset();
-                setFlipped((current) => !current);
+                setInverted((current) => !current);
             };
             return(
                 <div>
@@ -32,9 +32,9 @@
                             id="minutes" 
                             type="number" 
                             placeholder="Minutes" 
-                            value={flipped ? minutes * 60 : minutes} 
+                            value={inverted ? amount * 60 : amount} 
                             onChange={onChange}
-                            disabled={flipped}
+                            disabled={inverted}
                         />
                     </div>
                     <div>
@@ -43,13 +43,13 @@
                             id="hours" 
                             type="number" 
                             placeholder="Hours" 
-                            value={flipped ? minutes : Math.round(minutes/60)}
+                            value={inverted ? amount : Math.round(amount/60)}
                             onChange={onChange} 
-                            disabled={!flipped}
+                            disabled={!inverted}
                         />
                     </div>
                     <button onClick={reset}>RESET</button>
-                    <button onClick={onFlip}>FLIP</button>
+                    <button onClick={onFlip}>{inverted? "Turn back" : "Invert"}</button>
                 </div>
             );
        
