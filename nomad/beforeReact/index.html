@@ -10,7 +10,7 @@
         //**React는 html을 마음대로 컨트롤 할 수 있다.  interactive
         //span 생성
         const root = document.getElementById('root');
-        function App() {
+        function MinutesToHours() {
             const [amount, setMinutes] = React.useState(0);
             const [inverted, setInverted] = React.useState(false);
             const onChange = (event) =>{
@@ -25,7 +25,6 @@
             };
             return(
                 <div>
-                    <h1>Super Converter</h1>
                     <div>
                         <label htmlFor="minutes">Minutes</label>
                         <input 
@@ -53,6 +52,71 @@
                 </div>
             );
        
+        }
+        function KmToMile(){
+            const [amount, setAmount] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
+            const onChange = (event) => {
+                setAmount(event.target.value);
+            };
+            const reset = () => {
+                setAmount(0);
+            };
+            const onFlip = () =>{
+                reset();
+                setInverted((current) => !current);
+            };
+
+            return (
+                <div>
+                    <h3>Meter to KiloMeter</h3>
+                    <div>
+                        <label htmlFor="meter">Meter</label>
+                        <input 
+                            value={inverted ? amount*1000 : amount}
+                            onChange = {onChange}
+                            id="meter" 
+                            type="number"
+                            placeholder="meter"
+                            disabled = {inverted}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="kilometer">Kilometer</label>
+                        <input 
+                            value={inverted ? amount : Math.round(amount/1000)}
+                            onChange = {onChange}
+                            id="kilometer" 
+                            type="number"
+                            placeholder="kilometer"
+                            disabled = {!inverted}
+                        />
+                    </div>
+                    <button onClick={onFlip}>{inverted ? "미터로" : "킬로미터로"}</button>
+                    <button onClick={reset}>Reset</button>
+                </div>
+            );
+        }
+        function App() {
+            const [index, setIndex] = React.useState("xx");
+            const onSelect = (e) => {
+                setIndex(e.target.value);
+            }
+            return(
+                <div>
+                    <h1>Super Converter</h1>
+                    <select value={index} onChange={onSelect}>
+                        <option value="xx">Choose the unit </option>    
+                        <option value="0">Minutes & Hours</option>    
+                        <option value="1">Km & Miles</option>    
+                    </select>
+                    <hr/>
+                    {index === "xx" ? "Please select your units" : null}
+                    {index === "0" ? <MinutesToHours/> : null}
+                    {index === "1" ? <KmToMile/> : null}
+                </div>
+            );
+            
         }
         ReactDOM.render(<App/>, root);
     </script>
