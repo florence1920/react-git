@@ -10,110 +10,24 @@
         //**React는 html을 마음대로 컨트롤 할 수 있다.  interactive
         //span 생성
         const root = document.getElementById('root');
-        function MinutesToHours() {
-            const [amount, setMinutes] = React.useState(0);
-            const [inverted, setInverted] = React.useState(false);
-            const onChange = (event) =>{
-                setMinutes(event.target.value);
-            };
-            const reset = ()=>{
-                setMinutes(0);
-            };
-            const onFlip = () =>{
-                reset();
-                setInverted((current) => !current);
-            };
-            return(
-                <div>
-                    <div>
-                        <label htmlFor="minutes">Minutes</label>
-                        <input 
-                            id="minutes" 
-                            type="number" 
-                            placeholder="Minutes" 
-                            value={inverted ? amount * 60 : amount} 
-                            onChange={onChange}
-                            disabled={inverted}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="hours">Hours</label>
-                        <input 
-                            id="hours" 
-                            type="number" 
-                            placeholder="Hours" 
-                            value={inverted ? amount : Math.round(amount/60)}
-                            onChange={onChange} 
-                            disabled={!inverted}
-                        />
-                    </div>
-                    <button onClick={reset}>RESET</button>
-                    <button onClick={onFlip}>{inverted? "Turn back" : "Invert"}</button>
-                </div>
-            );
-       
-        }
-        function KmToMile(){
-            const [amount, setAmount] = React.useState(0);
-            const [inverted, setInverted] = React.useState(false);
-            const onChange = (event) => {
-                setAmount(event.target.value);
-            };
-            const reset = () => {
-                setAmount(0);
-            };
-            const onFlip = () =>{
-                reset();
-                setInverted((current) => !current);
-            };
-
+        function Btn({text, backgroundColor}){
             return (
-                <div>
-                    <h3>Meter to KiloMeter</h3>
-                    <div>
-                        <label htmlFor="meter">Meter</label>
-                        <input 
-                            value={inverted ? amount*1000 : amount}
-                            onChange = {onChange}
-                            id="meter" 
-                            type="number"
-                            placeholder="meter"
-                            disabled = {inverted}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="kilometer">Kilometer</label>
-                        <input 
-                            value={inverted ? amount : Math.round(amount/1000)}
-                            onChange = {onChange}
-                            id="kilometer" 
-                            type="number"
-                            placeholder="kilometer"
-                            disabled = {!inverted}
-                        />
-                    </div>
-                    <button onClick={onFlip}>{inverted ? "미터로" : "킬로미터로"}</button>
-                    <button onClick={reset}>Reset</button>
-                </div>
+                <button style={{
+                    backgroundColor : backgroundColor,
+                    border : "none",
+                    margin : "10px",
+                    color : "white"
+                }}
+                >
+                    {text}
+                </button>
             );
-        }
+        };
         function App() {
-            const [index, setIndex] = React.useState("xx");
-            const onSelect = (e) => {
-                setIndex(e.target.value);
-            }
             return(
                 <div>
-                    <h1>Super Converter</h1>
-                    <select value={index} onChange={onSelect}>
-                        <option value="xx">Choose the unit </option>    
-                        <option value="0">Minutes & Hours</option>    
-                        <option value="1">Km & Miles</option>    
-                    </select>
-                    <hr/>
-                    {index === "xx" ? "Please select your units" : null}
-                    {index === "0" ? <MinutesToHours/> : null}
-                    {index === "1" ? <KmToMile/> : null}
+                    <Btn text="test1" backgroundColor="black"/>
+                    <Btn text="test2" backgroundColor="blue"/>
                 </div>
             );
             
